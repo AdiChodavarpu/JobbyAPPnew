@@ -4,6 +4,8 @@ import Cookies from 'js-cookie'
 import Loader from 'react-loader-spinner'
 import {BsSearch} from 'react-icons/bs'
 
+import JobDetails from '../JobDetaills'
+
 import Header from '../Header'
 
 import './index.css'
@@ -245,7 +247,9 @@ class JobsRoute extends Component {
           <>{this.renderSideBar()}</>
           <div className="search-results-section">
             <>{this.renderSearchBar()}</>
-            <div className="search-results-container">sdf</div>
+            <div className="search-results-container">
+              <JobDetails />
+            </div>
           </div>
         </div>
       </div>

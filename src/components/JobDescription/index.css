@@ -1,0 +1,13 @@
+.job-description-item-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  min-height: 150px;
+  width: 90%;
+  border-radius: 5px;
+  background-color: #202020;
+  margin: 10px;
+  margin-left: 0px;
+  padding: 5px;
+}
