@@ -1,0 +1,108 @@
+.jobby-bg-container {
+  background-color: #000000;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.jobby-login-card-container {
+  background-color: #202020;
+  min-height: 300px;
+  min-width: 300px;
+  border-bottom: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 25px;
+  border-radius: 6px;
+  padding-bottom: 35px;
+}
+
+@media screen and (min-width: 767px) {
+  .jobby-login-card-container {
+    min-height: 320px;
+    min-width: 400px;
+    padding-bottom: 35px;
+  }
+}
+
+.login-card-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+}
+
+@media screen and (min-width: 767px) {
+  .login-card-container {
+    width: 95%;
+  }
+}
+
+.form-contianer {
+  width: 100%;
+}
+
+.login-logo {
+  height: 40px;
+  width: 135px;
+  margin-bottom: 20px;
+}
+
+.input-login-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 90%;
+  margin: 10px;
+}
+
+.input-label {
+  color: #f1f5f9;
+  font-family: 'Roboto';
+  font-size: 12px;
+  margin-bottom: 5px;
+}
+
+.login-input-element {
+  height: 35px;
+  width: 100%;
+  background-color: transparent;
+  border: 1px solid #475569;
+  border-radius: 5px;
+  color: #7e858e;
+  font-family: 'Roboto';
+  font-size: 15px;
+  padding: 5px;
+  padding-left: 10px;
+  cursor: pointer;
+  outline: none;
+}
+
+.login-button {
+  color: #f1f5f9;
+  background-color: #6366f1;
+  border: none;
+  border-radius: 5px;
+  height: 36px;
+  width: 90%;
+  margin-left: 10px;
+  margin-top: 10px;
+  font-size: 15px;
+  cursor: pointer;
+  margin-bottom: 0px;
+}
+
+.error-msg {
+  color: #ff0b37;
+  font-family: 'Roboto';
+  font-size: 15px;
+  margin-left: 10px;
+  margin-top: 5px;
+}
