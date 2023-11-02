@@ -1,8 +1,10 @@
 import {Component} from 'react'
 
 import Cookies from 'js-cookie'
-
 import Loader from 'react-loader-spinner'
+import {BsSearch} from 'react-icons/bs'
+
+import Header from '../Header'
 
 import './index.css'
 
@@ -51,7 +53,7 @@ const apiStatusConstants = {
   inProgress: 'IN_PROGRESS',
 }
 
-class SideBar extends Component {
+class JobsRoute extends Component {
   state = {
     profileDetails: {},
     apiStatus: apiStatusConstants.initial,
@@ -61,7 +63,7 @@ class SideBar extends Component {
       FREELANCE: false,
       INTERNSHIP: false,
     },
-    SalaryRange: salaryRangesList[0].salaryRangeId,
+    SalaryRange: '',
   }
 
   componentDidMount() {
@@ -176,7 +178,7 @@ class SideBar extends Component {
                 type="radio"
                 checked={SalaryRange === eachitem.salaryRangeId}
                 id={eachitem.salaryRangeId}
-                value={SalaryRange}
+                value={eachitem.salaryRangeId}
                 onChange={this.onChangeSalary}
               />
               <label className="radio-label" htmlFor={eachitem.salaryRangeId}>
@@ -189,14 +191,7 @@ class SideBar extends Component {
     )
   }
 
-  renderSuccessView = () => (
-    <div className="side-view">
-      <> {this.renderProfie()}</>
-      <> {this.renderLine()}</>
-      <>{this.renderEmployeeType()}</>
-      <>{this.renderSalaryRange()}</>
-    </div>
-  )
+  renderSuccessView = () => <> {this.renderProfie()}</>
 
   renderFailureView = () => <button type="button">Retry</button>
 
@@ -216,15 +211,46 @@ class SideBar extends Component {
     }
   }
 
-  render() {
-    const {apiStatus} = this.state
+  renderSideBar = () => (
+    <div className="sidebar-container">
+      <div className="profile-container">{this.renderProfileDetailsView()}</div>
+      <div className="side-view">
+        <> {this.renderLine()}</>
+        <>{this.renderEmployeeType()}</>
+        <> {this.renderLine()}</>
+        <>{this.renderSalaryRange()}</>
+      </div>
+    </div>
+  )
 
+  renderSearchBar = () => (
+    <div className="search-container">
+      <input type="search" placeholder="Search" className="search-input" />
+      <button
+        className="search-button"
+        type="button"
+        label="true"
+        data-testid="searchButton"
+      >
+        <BsSearch className="search-icon" />
+      </button>
+    </div>
+  )
+
+  render() {
     return (
-      <div className="find-jobs-side-bar">
-        {this.renderProfileDetailsView()}
+      <div className="Jobs-section">
+        <Header />
+        <div className="Job-container">
+          <>{this.renderSideBar()}</>
+          <div className="search-results-section">
+            <>{this.renderSearchBar()}</>
+            <div className="search-results-container">sdf</div>
+          </div>
+        </div>
       </div>
     )
   }
 }
 
-export default SideBar
+export default JobsRoute
