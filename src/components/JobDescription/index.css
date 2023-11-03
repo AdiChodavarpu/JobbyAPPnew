@@ -71,7 +71,7 @@
 .company-job-details-section {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
   width: 100%;
   margin-top: 8px;
 }
