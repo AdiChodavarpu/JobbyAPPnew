@@ -5,9 +5,142 @@
   align-items: flex-start;
   min-height: 150px;
   width: 90%;
-  border-radius: 5px;
+  border-radius: 8px;
   background-color: #202020;
   margin: 10px;
   margin-left: 0px;
-  padding: 5px;
+  padding: 20px;
+}
+
+.job-description-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.company-title-section {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.company-logo {
+  height: 50px;
+  width: 50px;
+  margin-right: 15px;
+}
+
+.company-title-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.company-title {
+  color: #f1f5f9;
+  font-size: 18px;
+  font-family: 'Roboto';
+  margin: 0px;
+}
+
+.rating-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5px;
+}
+
+.star-image {
+  height: 20px;
+  width: 20px;
+  color: #fbbf24;
+  margin-right: 3px;
+}
+
+.company-rating {
+  color: #f1f5f9;
+  font-size: 15px;
+  font-family: 'Roboto';
+  margin: 0px;
+  font-weight: 500;
+}
+
+.company-job-details-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  margin-top: 8px;
+}
+
+.location-employment-type-list {
+  list-style-type: none;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 0px;
+}
+
+.location-list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 15px;
+}
+
+.location {
+  margin-right: 5px;
+  color: #f1f5f9;
+  background-color: transparent;
+  height: 20px;
+  width: 20px;
+}
+
+.location-description {
+  color: #f1f5f9;
+  font-size: 16px;
+  font-family: 'Roboto';
+}
+
+.package-per-annum {
+  color: #f1f5f9;
+  font-size: 16px;
+  font-family: 'Roboto';
+  font-weight: 500;
+}
+
+.line-container {
+  width: 100%;
+  display: flex;
+}
+
+.lines {
+  width: 100%;
+  height: 1px;
+  margin-bottom: 15px;
+  color: #f1f5f9;
+}
+
+.job-description-section-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-content: flex-start;
+  margin-top: 10px;
+}
+
+.jobby-description-heading {
+  color: #f1f5f9;
+  font-size: 21px;
+  font-family: 'Roboto';
+  margin: 0px;
+}
+
+.jobby-description {
+  color: #f1f5f9;
+  font-size: 16px;
+  font-family: 'Roboto';
 }
