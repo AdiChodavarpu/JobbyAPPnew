@@ -6,9 +6,9 @@ import {AiFillStar} from 'react-icons/ai'
 
 import {BsBriefcaseFill} from 'react-icons/bs'
 import {TiLocation} from 'react-icons/ti'
+import {RiShareBoxLine} from 'react-icons/ri'
 
 import Header from '../Header'
-import SimilarJobs from '../SimilarJobs'
 
 import './index.css'
 
@@ -152,7 +152,13 @@ class JobItemDetails extends Component {
           <hr className="lines" />
 
           <div className="job-description-section-container">
-            <h1 className="jobby-description-heading">Description</h1>
+            <div className="Jobby_Description-Heading-Section">
+              <h1 className="jobby-description-heading">Description</h1>
+              <div className="visit-container">
+                <p className="visit-description">Visit</p>
+                <RiShareBoxLine className="visit-icon" />
+              </div>
+            </div>
             <p className="jobby-description">{jobDescription}</p>
           </div>
 
@@ -199,7 +205,7 @@ class JobItemDetails extends Component {
                 similarTitle,
               } = eachitem
               return (
-                <li key={similarId} className="similar-job-container">
+                <li key={similarId} className="similar-job-section">
                   <div className="similar-job-title-section">
                     <img
                       className="similar-job-company-logo"
@@ -208,11 +214,39 @@ class JobItemDetails extends Component {
                     />
                     <div className="similarjob-title-container">
                       <h1 className="similar-job-title">{similarTitle}</h1>
-                      <div className="rating-section">
-                        <AiFillStar className="star-image" />
-                        <p className="company-rating">{similarRating}</p>
+                      <div className="similar-rating-section">
+                        <AiFillStar className="similar-star-image" />
+                        <p className="similar-company-rating">
+                          {similarRating}
+                        </p>
                       </div>
                     </div>
+                  </div>
+
+                  <div className="similar-job-description-section-container">
+                    <h1 className="similar-job-description-heading">
+                      Description
+                    </h1>
+                    <p className="similar-job-description">
+                      {similarJobDescription}
+                    </p>
+                  </div>
+
+                  <div className="Similar-job-details-section">
+                    <ul className="location-employment-type-unordered-list">
+                      <li className="location-employment-list">
+                        <TiLocation className="location-employment-icon" />
+                        <p className="location-employment-description">
+                          {similarLocation}
+                        </p>
+                      </li>
+                      <li className="location-employment-list">
+                        <BsBriefcaseFill className="location-employment-icon" />
+                        <p className="location-employment-description">
+                          {similarEmploymentType}
+                        </p>
+                      </li>
+                    </ul>
                   </div>
                 </li>
               )
