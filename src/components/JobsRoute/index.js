@@ -65,6 +65,7 @@ class JobsRoute extends Component {
       FREELANCE: false,
       INTERNSHIP: false,
     },
+    employmentType: '',
     SalaryRange: '',
   }
 
@@ -92,6 +93,7 @@ class JobsRoute extends Component {
         profielImageUrl: FetchedData.profile_image_url,
         shortBio: FetchedData.short_bio,
       }
+
       this.setState({
         profileDetails: ModifiedData,
         apiStatus: apiStatusConstants.success,
@@ -108,9 +110,19 @@ class JobsRoute extends Component {
 
     updateCheckBox[SelectedValue] = !updateCheckBox[SelectedValue]
 
-    this.setState({
-      isChecked: updateCheckBox,
-    })
+    const filterEmployment = Object.keys(updateCheckBox).filter(
+      eachitem => updateCheckBox[eachitem] === true,
+    )
+
+    const result = filterEmployment.join()
+
+    this.setState(
+      {
+        isChecked: updateCheckBox,
+        employmentType: result,
+      },
+      this.getJobDetails,
+    )
   }
 
   renderLoadingView = () => (
@@ -240,6 +252,8 @@ class JobsRoute extends Component {
   )
 
   render() {
+    const {employmentType} = this.state
+
     return (
       <div className="Jobs-section">
         <Header />
@@ -248,7 +262,7 @@ class JobsRoute extends Component {
           <div className="search-results-section">
             <>{this.renderSearchBar()}</>
             <div className="search-results-container">
-              <JobDetails />
+              <JobDetails EmploymentRole={employmentType} />
             </div>
           </div>
         </div>

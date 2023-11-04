@@ -18,3 +18,107 @@
   width: 100%;
   padding: 0px;
 }
+
+.no-jobs-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 90%;
+  height: 100vh;
+}
+
+.no-jobs-image {
+  height: 300px;
+  width: 450px;
+  margin-top: 30px;
+  margin-bottom: 23px;
+}
+
+.no-jobs-heading {
+  color: #f1f5f9;
+  font-size: 35px;
+  font-family: 'Roboto';
+  margin: 0px;
+}
+
+.no-jobs-description {
+  color: #7e858e;
+  font-size: 19px;
+  font-family: 'Roboto';
+  margin: 0px;
+  margin-top: 10px;
+}
+
+.failure-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 90%;
+  height: 100vh;
+}
+
+.failure-image {
+  height: 300px;
+  width: 400px;
+  margin-top: 40px;
+  margin-bottom: 23px;
+}
+
+.failure-heading {
+  color: #f1f5f9;
+  font-size: 35px;
+  font-family: 'Roboto';
+  margin: 0px;
+}
+
+.failure-description {
+  color: #7e858e;
+  font-size: 18px;
+  font-family: 'Roboto';
+  margin: 10px;
+}
+
+.failure-retry-button {
+  color: #f1f5f9;
+  background-color: #6366f1;
+  border: none;
+  border-radius: 5px;
+  height: 30px;
+  width: 100px;
+  font-size: 15px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+@media screen and (max-width: 767px) {
+  .failure-section {
+    margin-top: 30px;
+  }
+
+  .failure-image {
+    height: 200px;
+    width: 280px;
+    margin-top: 40px;
+    margin-bottom: 23px;
+  }
+
+  .failure-heading {
+    color: #f1f5f9;
+    font-size: 20px;
+    font-family: 'Roboto';
+    margin: 0px;
+    text-align: center;
+    width: 300px;
+    margin-bottom: 15px;
+  }
+
+  .failure-description {
+    color: #7e858e;
+    font-size: 15px;
+    font-family: 'Roboto';
+    margin: 13px;
+    text-align: center;
+  }
+}

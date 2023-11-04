@@ -65,6 +65,7 @@ class JobItemDetails extends Component {
       const ModifiedJobDetails = {
         id: fetchedData.id,
         companyLogoUrl: fetchedData.company_logo_url,
+        companyWebSiteUrl: fetchedData.company_website_url,
         employmentType: fetchedData.employment_type,
         jobDescription: fetchedData.job_description,
         lifeAtCompany: this.getLifeAtCompany(fetchedData.life_at_company),
@@ -96,7 +97,7 @@ class JobItemDetails extends Component {
     }
   }
 
-  renderSuccesView = () => {
+  renderSuccessView = () => {
     const {JobItemDetailsList} = this.state
     const JobitemModifiedDetails = JobItemDetailsList[0].ModifiedJobDetails
 
@@ -104,8 +105,8 @@ class JobItemDetails extends Component {
 
     const {
       companyLogoUrl,
+      companyWebSiteUrl,
       employmentType,
-      id,
       jobDescription,
       lifeAtCompany,
       location,
@@ -154,10 +155,10 @@ class JobItemDetails extends Component {
           <div className="job-description-section-container">
             <div className="Jobby_Description-Heading-Section">
               <h1 className="jobby-description-heading">Description</h1>
-              <div className="visit-container">
+              <a href={companyWebSiteUrl} className="visit-container">
                 <p className="visit-description">Visit</p>
                 <RiShareBoxLine className="visit-icon" />
-              </div>
+              </a>
             </div>
             <p className="jobby-description">{jobDescription}</p>
           </div>
@@ -210,7 +211,7 @@ class JobItemDetails extends Component {
                     <img
                       className="similar-job-company-logo"
                       src={similarCompanyLogoUrl}
-                      alt="company logo"
+                      alt="similar job company logo"
                     />
                     <div className="similarjob-title-container">
                       <h1 className="similar-job-title">{similarTitle}</h1>
@@ -257,10 +258,25 @@ class JobItemDetails extends Component {
     )
   }
 
-  renderFailureView = () => <div>FailureView</div>
+  renderFailureView = () => (
+    <div className="failure-section">
+      <img
+        src="https://assets.ccbp.in/frontend/react-js/failure-img.png"
+        alt="failure view"
+        className="failure-image"
+      />
+      <h1 className="failure-heading">Oops!Something Went Wrong</h1>
+      <p className="failure-description">
+        We cannot seem to find the page you are looking for.
+      </p>
+      <button type="button" className="failure-retry-button">
+        Retry
+      </button>
+    </div>
+  )
 
   renderLoadingView = () => (
-    <div>
+    <div className="Loading-section">
       <Loader type="ThreeDots" color="#0b69ff" width="50" height="50" />
     </div>
   )
@@ -270,7 +286,7 @@ class JobItemDetails extends Component {
 
     switch (apiStatus) {
       case apiStatusConstants.success:
-        return this.renderSuccesView()
+        return this.renderSuccessView()
       case apiStatusConstants.inProgress:
         return this.renderLoadingView()
       case apiStatusConstants.failure:

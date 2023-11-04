@@ -57,12 +57,12 @@ const Header = props => {
           </Link>
           <li className="nav-large-items">
             <button
-              className="logout-mobile-button"
               type="button"
+              className="logout-mobile-button"
+              label="true"
               onClick={OnLogout}
             >
               <FiLogOut className="nav-icons" />
-              Logout
             </button>
           </li>
         </ul>

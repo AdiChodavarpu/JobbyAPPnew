@@ -65,7 +65,7 @@ const JobDescription = props => {
           <hr className="lines" />
           <>{DescriptionSection()}</>
         </div>
-      </li>{' '}
+      </li>
     </Link>
   )
 }
