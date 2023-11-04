@@ -67,6 +67,7 @@ class JobsRoute extends Component {
     },
     employmentType: '',
     SalaryRange: '',
+    onChangeSearchInput: '',
   }
 
   componentDidMount() {
@@ -116,13 +117,10 @@ class JobsRoute extends Component {
 
     const result = filterEmployment.join()
 
-    this.setState(
-      {
-        isChecked: updateCheckBox,
-        employmentType: result,
-      },
-      this.getJobDetails,
-    )
+    this.setState({
+      isChecked: updateCheckBox,
+      employmentType: result,
+    })
   }
 
   renderLoadingView = () => (
@@ -237,9 +235,18 @@ class JobsRoute extends Component {
     </div>
   )
 
+  onChangeSearchInput = event => {
+    this.setState({onChangeSearchInput: event.target.value})
+  }
+
   renderSearchBar = () => (
     <div className="search-container">
-      <input type="search" placeholder="Search" className="search-input" />
+      <input
+        type="search"
+        placeholder="Search"
+        className="search-input"
+        onChange={this.onChangeSearchInput}
+      />
       <button
         className="search-button"
         type="button"

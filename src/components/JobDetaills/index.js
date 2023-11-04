@@ -26,8 +26,9 @@ class JobDetails extends Component {
   getJobDetails = async () => {
     const {EmploymentRole} = this.props
     console.log(EmploymentRole)
+
     this.setState({apiStatus: apiStatusConstants.inProgress})
-    const url = 'https://apis.ccbp.in/jobs'
+    const url = `https://apis.ccbp.in/jobs?employment_type=${EmploymentRole}`
     const Token = Cookies.get('jwt_token')
     const options = {
       headers: {
@@ -127,6 +128,8 @@ class JobDetails extends Component {
   }
 
   render() {
+    const {EmploymentRole} = this.props
+    console.log(EmploymentRole)
     return <div className="jobDetails-view">{this.renderJobDetailsView()}</div>
   }
 }
