@@ -41,6 +41,13 @@
   padding: 30px;
 }
 
+@media screen and (max-width: 767px) {
+  .Job-item-Details-Card-Container {
+    width: 100%;
+    padding: 20px;
+  }
+}
+
 .Company-Logo {
   height: 65px;
   width: 65px;
@@ -184,6 +191,17 @@
   width: 100%;
 }
 
+@media screen and (max-width: 767px) {
+  .life-at-company-description {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-top: 10px;
+    width: 100%;
+  }
+}
+
 .life-at-company {
   color: #f1f5f9;
   font-size: 18px;
@@ -195,6 +213,12 @@
 .life-at-company-image {
   height: 170px;
   width: 250px;
+}
+
+@media screen and (max-width: 767px) {
+  .life-at-company-image {
+    margin-top: 20px;
+  }
 }
 
 .similar-jobs-list {
@@ -237,6 +261,15 @@
   width: 300px;
   margin-right: 30px;
   margin-bottom: 30px;
+}
+
+@media screen and (max-width: 767px) {
+  .similar-job-section {
+    padding: 25px;
+    width: 300px;
+    margin-right: 5px;
+    margin-bottom: 20px;
+  }
 }
 
 .similar-job-title-section {
