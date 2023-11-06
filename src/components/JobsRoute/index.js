@@ -55,6 +55,13 @@ const apiStatusConstants = {
   inProgress: 'IN_PROGRESS',
 }
 
+const jobsApiStatusConstants = {
+  jobsInitial: 'INITIAL',
+  jobsSuccess: 'SUCCESS',
+  jobsFailure: 'FAILURE',
+  jobsInProgress: 'IN_PROGRESS',
+}
+
 class JobsRoute extends Component {
   state = {
     profileDetails: {},
@@ -68,10 +75,15 @@ class JobsRoute extends Component {
     employmentType: '',
     SalaryRange: '',
     onChangeSearchInput: '',
+    searchInput: '',
+
+    jobDetailsList: [],
+    JobsApiStatus: jobsApiStatusConstants.jobsInitial,
   }
 
   componentDidMount() {
     this.getProfileDetails()
+    this.getJobDetails()
   }
 
   getProfileDetails = async () => {
@@ -104,6 +116,42 @@ class JobsRoute extends Component {
     }
   }
 
+  getJobDetails = async () => {
+    const {employmentType, SalaryRange, searchInput} = this.state
+
+    this.setState({JobsApiStatus: jobsApiStatusConstants.jobsInProgress})
+    const url = `https://apis.ccbp.in/jobs?employment_type=${employmentType}&minimum_package=${SalaryRange}&search=${searchInput}`
+    const Token = Cookies.get('jwt_token')
+    const options = {
+      headers: {
+        Authorization: `Bearer ${Token}`,
+      },
+    }
+    const response = await fetch(url, options)
+
+    if (response.ok) {
+      const data = await response.json()
+      console.log(data)
+      const ModifiedData = data.jobs.map(eachitem => ({
+        id: eachitem.id,
+        companyLogoUrl: eachitem.company_logo_url,
+        employmentType: eachitem.employment_type,
+        jobDescription: eachitem.job_description,
+        location: eachitem.location,
+        packagePerAnnum: eachitem.package_per_annum,
+        rating: eachitem.rating,
+        title: eachitem.title,
+      }))
+
+      this.setState({
+        jobDetailsList: ModifiedData,
+        JobsApiStatus: jobsApiStatusConstants.jobsSuccess,
+      })
+    } else {
+      this.setState({JobsApiStatus: jobsApiStatusConstants.jobsFailure})
+    }
+  }
+
   onSelectCheckBox = event => {
     const {isChecked} = this.state
     const SelectedValue = event.target.value
@@ -117,14 +165,17 @@ class JobsRoute extends Component {
 
     const result = filterEmployment.join()
 
-    this.setState({
-      isChecked: updateCheckBox,
-      employmentType: result,
-    })
+    this.setState(
+      {
+        isChecked: updateCheckBox,
+        employmentType: result,
+      },
+      this.getJobDetails,
+    )
   }
 
   renderLoadingView = () => (
-    <div>
+    <div data-testid="loader">
       <Loader type="ThreeDots" color="#0b69ff" width="50" height="50" />
     </div>
   )
@@ -174,7 +225,8 @@ class JobsRoute extends Component {
     )
   }
 
-  onChangeSalary = event => this.setState({SalaryRange: event.target.value})
+  onChangeSalary = event =>
+    this.setState({SalaryRange: event.target.value}, this.getJobDetails)
 
   renderSalaryRange = () => {
     const {SalaryRange} = this.state
@@ -205,7 +257,23 @@ class JobsRoute extends Component {
 
   renderSuccessView = () => <> {this.renderProfie()}</>
 
-  renderFailureView = () => <button type="button">Retry</button>
+  onClickRetry = () => {
+    this.getProfileDetails()
+  }
+
+  renderFailureView = () => (
+    <button
+      type="button"
+      className="failure-button"
+      onClick={this.onClickRetry}
+    >
+      Retry
+    </button>
+  )
+
+  onFailureRetry = () => {
+    this.getJobDetails()
+  }
 
   renderProfileDetailsView = () => {
     const {apiStatus} = this.state
@@ -239,27 +307,38 @@ class JobsRoute extends Component {
     this.setState({onChangeSearchInput: event.target.value})
   }
 
-  renderSearchBar = () => (
-    <div className="search-container">
-      <input
-        type="search"
-        placeholder="Search"
-        className="search-input"
-        onChange={this.onChangeSearchInput}
-      />
-      <button
-        className="search-button"
-        type="button"
-        label="true"
-        data-testid="searchButton"
-      >
-        <BsSearch className="search-icon" />
-      </button>
-    </div>
-  )
+  onClickSearchButton = () => {
+    const {onChangeSearchInput} = this.state
+
+    this.setState({searchInput: onChangeSearchInput}, this.getJobDetails)
+  }
+
+  renderSearchBar = () => {
+    const {onChangeSearchInput} = this.state
+    return (
+      <div className="search-container">
+        <input
+          type="search"
+          placeholder="Search"
+          className="search-input"
+          onChange={this.onChangeSearchInput}
+          value={onChangeSearchInput}
+        />
+        <button
+          className="search-button"
+          type="button"
+          label="true"
+          data-testid="searchButton"
+          onClick={this.onClickSearchButton}
+        >
+          <BsSearch className="search-icon" />
+        </button>
+      </div>
+    )
+  }
 
   render() {
-    const {employmentType} = this.state
+    const {jobDetailsList, JobsApiStatus} = this.state
 
     return (
       <div className="Jobs-section">
@@ -273,7 +352,11 @@ class JobsRoute extends Component {
           <div className="search-results-section">
             <div className="search-bar-container">{this.renderSearchBar()}</div>
             <div className="search-results-container">
-              <JobDetails EmploymentRole={employmentType} />
+              <JobDetails
+                JobDetailsList={jobDetailsList}
+                JobsApiStatus={JobsApiStatus}
+                onFailureRetry={this.onFailureRetry}
+              />
             </div>
           </div>
         </div>

@@ -36,6 +36,17 @@
   padding-top: 20px;
 }
 
+@media screen and (max-width: 767px) {
+  .sidebar-container {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    min-height: 50vh;
+  }
+}
+
 .profile-container {
   display: flex;
   flex-direction: column;
@@ -288,4 +299,16 @@
   .search-bar-container {
     display: none;
   }
+}
+
+.failure-button {
+  color: #f1f5f9;
+  background-color: #6366f1;
+  border: none;
+  border-radius: 5px;
+  height: 36px;
+  width: 90px;
+  font-size: 12px;
+  cursor: pointer;
+  margin-bottom: 0px;
 }

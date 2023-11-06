@@ -44,12 +44,12 @@ class Login extends Component {
     const {password} = this.state
     return (
       <div className="input-login-container">
-        <label className="input-label" htmlFor="myusername">
+        <label className="input-label" htmlFor="myPassword">
           PASSWORD
         </label>
         <input
           className="login-input-element"
-          id="myusername"
+          id="myPassword"
           type="password"
           placeholder="Password"
           value={password}
@@ -82,6 +82,7 @@ class Login extends Component {
       method: 'POST',
       body: JSON.stringify(userDetails),
     }
+
     const response = await fetch(Url, options)
     const data = await response.json()
     console.log(data)

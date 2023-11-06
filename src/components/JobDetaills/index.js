@@ -1,65 +1,18 @@
 import {Component} from 'react'
-import Cookies from 'js-cookie'
 import Loader from 'react-loader-spinner'
 
 import JobDescription from '../JobDescription'
 
 import './index.css'
 
-const apiStatusConstants = {
-  initial: 'INITIAL',
-  success: 'SUCCESS',
-  failure: 'FAILURE',
-  inProgress: 'IN_PROGRESS',
+const jobsApiStatusConstants = {
+  jobsInitial: 'INITIAL',
+  jobsSuccess: 'SUCCESS',
+  jobsFailure: 'FAILURE',
+  jobsInProgress: 'IN_PROGRESS',
 }
 
 class JobDetails extends Component {
-  state = {
-    jobDetailsList: [],
-    apiStatus: apiStatusConstants.initial,
-  }
-
-  componentDidMount() {
-    this.getJobDetails()
-  }
-
-  getJobDetails = async () => {
-    const {EmploymentRole} = this.props
-    console.log(EmploymentRole)
-
-    this.setState({apiStatus: apiStatusConstants.inProgress})
-    const url = `https://apis.ccbp.in/jobs?employment_type=${EmploymentRole}`
-    const Token = Cookies.get('jwt_token')
-    const options = {
-      headers: {
-        Authorization: `Bearer ${Token}`,
-      },
-    }
-    const response = await fetch(url, options)
-
-    if (response.ok) {
-      const data = await response.json()
-      console.log(data)
-      const ModifiedData = data.jobs.map(eachitem => ({
-        id: eachitem.id,
-        companyLogoUrl: eachitem.company_logo_url,
-        employmentType: eachitem.employment_type,
-        jobDescription: eachitem.job_description,
-        location: eachitem.location,
-        packagePerAnnum: eachitem.package_per_annum,
-        rating: eachitem.rating,
-        title: eachitem.title,
-      }))
-
-      this.setState({
-        jobDetailsList: ModifiedData,
-        apiStatus: apiStatusConstants.success,
-      })
-    } else {
-      this.setState({apiStatus: apiStatusConstants.failure})
-    }
-  }
-
   NoJobsSection = () => (
     <div className="no-jobs-container">
       <img
@@ -75,51 +28,64 @@ class JobDetails extends Component {
   )
 
   renderSuccessView = () => {
-    const {jobDetailsList} = this.state
+    const {JobDetailsList} = this.props
+    console.log(JobDetailsList)
 
     return (
       <ul className="job-details-list-container">
-        {jobDetailsList.length === 0
+        {JobDetailsList.length === 0
           ? this.NoJobsSection()
-          : jobDetailsList.map(eachitem => (
+          : JobDetailsList.map(eachitem => (
               <JobDescription key={eachitem.id} JobDetails={eachitem} />
             ))}
       </ul>
     )
   }
 
-  renderFailureView = () => (
-    <div className="failure-section">
-      <img
-        src="https://assets.ccbp.in/frontend/react-js/failure-img.png"
-        alt="failure view"
-        className="failure-image"
-      />
-      <h1 className="failure-heading">Oops!Something Went Wrong</h1>
-      <p className="failure-description">
-        We cannot seem to find the page you are looking for.
-      </p>
-      <button type="button" className="failure-retry-button">
-        Retry
-      </button>
-    </div>
-  )
+  renderFailureView = () => {
+    const {onFailureRetry} = this.props
+
+    const onRetry = () => {
+      onFailureRetry()
+    }
+
+    return (
+      <div className="failure-section">
+        <img
+          src="https://assets.ccbp.in/frontend/react-js/failure-img.png"
+          alt="failure view"
+          className="failure-image"
+        />
+        <h1 className="failure-heading">Oops! Something Went Wrong</h1>
+        <p className="failure-description">
+          We cannot seem to find the page you are looking for.
+        </p>
+        <button
+          type="button"
+          className="failure-retry-button"
+          onClick={onRetry}
+        >
+          Retry
+        </button>
+      </div>
+    )
+  }
 
   renderLoadingView = () => (
-    <div className="Loading-section">
+    <div className="Loading-section" data-testid="loader">
       <Loader type="ThreeDots" color="#0b69ff" width="50" height="50" />
     </div>
   )
 
   renderJobDetailsView = () => {
-    const {apiStatus} = this.state
+    const {JobsApiStatus} = this.props
 
-    switch (apiStatus) {
-      case apiStatusConstants.success:
+    switch (JobsApiStatus) {
+      case jobsApiStatusConstants.jobsSuccess:
         return this.renderSuccessView()
-      case apiStatusConstants.inProgress:
+      case jobsApiStatusConstants.jobsInProgress:
         return this.renderLoadingView()
-      case apiStatusConstants.failure:
+      case jobsApiStatusConstants.jobsFailure:
         return this.renderFailureView()
 
       default:
@@ -128,8 +94,6 @@ class JobDetails extends Component {
   }
 
   render() {
-    const {EmploymentRole} = this.props
-    console.log(EmploymentRole)
     return <div className="jobDetails-view">{this.renderJobDetailsView()}</div>
   }
 }

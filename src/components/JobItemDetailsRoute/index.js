@@ -97,6 +97,10 @@ class JobItemDetails extends Component {
     }
   }
 
+  onClickRetry = () => {
+    this.getJobItemDetails()
+  }
+
   renderSuccessView = () => {
     const {JobItemDetailsList} = this.state
     const JobitemModifiedDetails = JobItemDetailsList[0].ModifiedJobDetails
@@ -125,7 +129,7 @@ class JobItemDetails extends Component {
             <img
               className="Company-Logo"
               src={companyLogoUrl}
-              alt="company logo"
+              alt="job details company logo"
             />
             <div className="company-title-container">
               <h1 className="Company-Title">{title}</h1>
@@ -186,7 +190,7 @@ class JobItemDetails extends Component {
               <img
                 className="life-at-company-image"
                 src={imageUrl}
-                alt={imageUrl}
+                alt="life at company"
               />
             </div>
           </div>
@@ -265,18 +269,22 @@ class JobItemDetails extends Component {
         alt="failure view"
         className="failure-image"
       />
-      <h1 className="failure-heading">Oops!Something Went Wrong</h1>
+      <h1 className="failure-heading">Oops! Something Went Wrong</h1>
       <p className="failure-description">
         We cannot seem to find the page you are looking for.
       </p>
-      <button type="button" className="failure-retry-button">
+      <button
+        type="button"
+        className="failure-retry-button"
+        onClick={this.onClickRetry}
+      >
         Retry
       </button>
     </div>
   )
 
   renderLoadingView = () => (
-    <div className="Loading-section">
+    <div className="Loading-section" data-testid="loader">
       <Loader type="ThreeDots" color="#0b69ff" width="50" height="50" />
     </div>
   )
