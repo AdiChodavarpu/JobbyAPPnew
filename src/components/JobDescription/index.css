@@ -12,6 +12,17 @@
   padding: 20px;
 }
 
+@media screen and (max-width: 767px) {
+  .job-description-item-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 95%;
+  }
+}
+
 .job-description-section {
   display: flex;
   flex-direction: column;

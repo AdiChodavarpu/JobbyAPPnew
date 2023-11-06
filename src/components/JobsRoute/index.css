@@ -3,13 +3,26 @@
   background-color: #000000;
 }
 
-.Job-container {
+.Jobs-Maincontainer {
   display: flex;
+  flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
   min-height: 100vh;
   width: 100%;
   background-color: #000000;
+}
+
+@media screen and (max-width: 767px) {
+  .Jobs-Maincontainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    width: 100%;
+    background-color: #000000;
+  }
 }
 
 .sidebar-container {
@@ -40,6 +53,12 @@
   align-items: center;
 }
 
+@media screen and (max-width: 767px) {
+  .side-view {
+    min-height: 50vh;
+  }
+}
+
 .profile-bg-container {
   background-image: url('https://assets.ccbp.in/frontend/react-js/profile-bg.png');
   min-height: 180px;
@@ -48,6 +67,12 @@
   align-items: flex-start;
   background-size: cover;
   padding: 30px 10px 30px 20px;
+}
+
+@media screen and (max-width: 767px) {
+  .profile-bg-container {
+    width: 95%;
+  }
 }
 
 .profile-image {
@@ -78,6 +103,12 @@
   margin-bottom: 20px;
 }
 
+@media screen and (max-width: 767px) {
+  .line {
+    width: 90%;
+  }
+}
+
 .employe-container {
   width: 80%;
   display: flex;
@@ -104,6 +135,12 @@
   align-items: center;
 }
 
+@media screen and (max-width: 767px) {
+  .employe-container {
+    width: 90%;
+  }
+}
+
 .checkbox-element {
   height: 15px;
   width: 15px;
@@ -121,6 +158,12 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+}
+
+@media screen and (max-width: 767px) {
+  .salary-container {
+    width: 90%;
+  }
 }
 
 .salary-heading {
@@ -169,6 +212,12 @@
   padding: 20px;
 }
 
+@media screen and (max-width: 767px) {
+  .search-results-section {
+    padding-top: 0px;
+  }
+}
+
 .search-container {
   display: flex;
   justify-content: center;
@@ -213,4 +262,30 @@
   background-color: #000000;
   min-height: 100vh;
   width: 100%;
+}
+
+.mobile-view-search-container {
+  margin-top: 20px;
+  display: none;
+}
+
+@media screen and (max-width: 767px) {
+  .mobile-view-search-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.search-bar-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media screen and (max-width: 767px) {
+  .search-bar-container {
+    display: none;
+  }
 }

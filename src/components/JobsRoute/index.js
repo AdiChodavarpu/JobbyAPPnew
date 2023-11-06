@@ -264,10 +264,14 @@ class JobsRoute extends Component {
     return (
       <div className="Jobs-section">
         <Header />
-        <div className="Job-container">
+
+        <div className="Jobs-Maincontainer">
+          <div className="mobile-view-search-container">
+            {this.renderSearchBar()}
+          </div>
           <>{this.renderSideBar()}</>
           <div className="search-results-section">
-            <>{this.renderSearchBar()}</>
+            <div className="search-bar-container">{this.renderSearchBar()}</div>
             <div className="search-results-container">
               <JobDetails EmploymentRole={employmentType} />
             </div>
